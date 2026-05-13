@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LandingPage</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <img class="bg" src="Images/bgFarmaci.png" alt="" />
+      <div class="menu container">
+        <a href="#" class="logo">Farmacia Angeluz</a>
+        <input type="checkbox" id="menu" />
+        <label for="menu">
+          <img src="Images/menuIcon.png" class="menu_icono" alt="" />
+        </label>
+
+        <nav class="navbar">
+          <ul>
+            <li><a href="#">inicio</a></li>
+            <li><a href="#">Productos</a></li>
+            <li><a href="#">Acerca de nosotros</a></li>
+          </ul>
+        </nav>
+
+        <!-- CARRITO -->
+        <div>
+          <ul>
+            <li class="submenu"></li>
+            <img src="" alt="" />
+            <div id="carrito">
+              <table id="lista-carrito">
+                <thead>
+                  <tr>
+                    <!-- <th>Imagen</th>
+                    <th>Nombre</th>
+                    <th>Precio</th> -->
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+              <a href="#" id="vaciar-carrito" class="btn-3">Vaciar carrito</a>
+            </div>
+          </ul>
+        </div>
+      </div>
+
+      <div class="header-content container">
+        <div class="header-txt">
+          <h1>
+            <span>Bienvenido</span>
+            Tu fuente confiable de salud y bienestar
+          </h1>
+          <p>
+            En Farmacia Angeluz somos tu aliado de confianza en el cuidado de tu
+            salud. Aquí encontrarás atención cercana, promociones especiales,
+            descuentos en medicamentos y consejos útiles para el bienestar de tu
+            familia.
+          </p>
+        </div>
+        <div class="header-img">
+          <img src="Images/LOGO.png" alt="" />
+        </div>
+      </div>
+
+      <div class="header-content container">
+        <div class="swiper mySwiper-1">
+          <div class="swiper-wrapper">
+            <!-- //slider -->
+            <div class="swiper-slide">
+              <img class="slider" src="Images/1.png" alt="" />
+            </div>
+
+            <!-- //slider -->
+            <div class="swiper-slide">
+              <img class="slider" src="Images/2.png" alt="" />
+            </div>
+
+            <!-- //slider -->
+            <div class="swiper-slide">
+              <img class="slider" src="Images/3.png" alt="" />
+            </div>
+          </div>
+
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+        <a href="#" class="enlace">Para más información</a>
+      </div>
+
+      <section></section>
+    </header>
+
+    <footer class="footer">
+      <div></div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
