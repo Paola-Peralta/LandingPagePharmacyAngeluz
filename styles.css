@@ -18,7 +18,6 @@ body {
 }
 
 .header {
-  display: flex;
   align-items: center;
   min-height: 70vh;
   position: relative;
@@ -83,13 +82,14 @@ body {
 .header-content {
   display: flex;
   align-items: center;
-  padding-top: 10px;
+  justify-content: space-between;
+  /* padding-top: 10px; */
 }
 
 .header-txt {
   width: 50%;
   margin-right: 50px;
-  margin-top: -200px;
+  margin-top: 0;
 }
 
 .header-txt h1 {
@@ -112,4 +112,37 @@ body {
 .header-img img {
   width: 700px;
   margin-top: 10px;
+}
+
+.swiper-slide {
+  font-size: 18px;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-button-prev::after {
+  font-size: 25px;
+}
+
+.swiper-button-next::after {
+  font-size: 25px;
+}
+
+.swiper-button-next {
+  color: #edb40c;
+}
+
+.swiper-button-prev {
+  color: #edb40c;
+}
+
+.swiper-pagination-bullet {
+  background-color: #747474;
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #edb312;
 }
