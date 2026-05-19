@@ -14,50 +14,73 @@
     <header class="header">
       <img class="bg" src="Images/bgFarmaci.png" alt="" />
       <div class="menu container">
-        <a href="#" class="logo">Farmacia Angeluz</a>
+        <a href="#" class="logo">
+          <span class="logo-text">Farmacia Angeluz</span>
+        </a>
         <input type="checkbox" id="menu" />
         <label for="menu">
-          <img src="Images/menu.png" class="menu_icono" alt="" />
+          <img src="Images/menu.png" class="menu_icono" alt="Menu" />
         </label>
 
         <nav class="navbar">
           <ul>
-            <li><a href="#">Inicio</a></li>
+            <li><a href="#inicio">Inicio</a></li>
             <li><a href="#">Productos</a></li>
             <li><a href="#">Consultas</a></li>
             <li><a href="#">Acerca de nosotros</a></li>
           </ul>
         </nav>
 
-        <!-- CARRITO -->
-        <div>
+        <div class="menu-cart">
           <ul>
-            <li class="submenu"></li>
-            <img src="" alt="" />
-            <div id="carrito">
-              <table id="lista-carrito">
-                <thead>
-                  <tr>
-                    <!-- <th>Imagen</th>
-                    <th>Nombre</th>
-                    <th>Precio</th> -->
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-              <a href="#" id="vaciar-carrito" class="btn-3">Vaciar carrito</a>
-            </div>
+            <li class="submenu">
+              <a href="#" class="cart-button" aria-label="Carrito">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M3.75 5.25H5.21741C5.66842 5.25 6.06982 5.53604 6.21675 5.96244L6.75 7.5H18.75L17.2037 13.6875H8.20368"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M9.75 18.75C10.3713 18.75 10.875 18.2463 10.875 17.625C10.875 17.0037 10.3713 16.5 9.75 16.5C9.12868 16.5 8.625 17.0037 8.625 17.625C8.625 18.2463 9.12868 18.75 9.75 18.75Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M16.5 18.75C17.1213 18.75 17.625 18.2463 17.625 17.625C17.625 17.0037 17.1213 16.5 16.5 16.5C15.8787 16.5 15.375 17.0037 15.375 17.625C15.375 18.2463 15.8787 18.75 16.5 18.75Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </a>
+              <div id="carrito">
+                <table id="lista-carrito">
+                  <thead>
+                    <tr>
+                      <th>Producto</th>
+                      <th>Precio</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+                <a href="#" id="vaciar-carrito" class="btn-3">Vaciar carrito</a>
+              </div>
+            </li>
           </ul>
         </div>
       </div>
 
-      <div class="header-content container">
+      <div id="inicio" class="header-content hero-content container">
         <div class="header-txt">
           <h1>
-            <span>Bienvenido</span>
-            Tu fuente confiable de salud y bienestar
+            <span class="header-kicker">Bienvenido</span>
+            <span class="header-title">Tu fuente confiable de salud y bienestar</span>
           </h1>
-          <p>
+          <p class="header-description">
             En Farmacia Angeluz somos tu aliado de confianza en el cuidado de tu
             salud. Aquí encontrarás atención cercana, promociones especiales,
             descuentos en medicamentos y consejos útiles para el bienestar de tu
@@ -69,7 +92,7 @@
         </div>
       </div>
 
-      <div class="header-content container">
+      <div class="header-content slider-content container">
         <div class="swiper mySwiper-1">
           <div class="swiper-wrapper">
             <!-- //slider -->
@@ -92,10 +115,78 @@
           <div class="swiper-button-prev"></div>
           <div class="swiper-pagination"></div>
         </div>
-        <!-- <a href="#" class="enlace">Para más información</a>
-      </div> -->
+      </div>
 
-      <section></section>
+      <section class="benefits">
+        <div class="benefits-grid container">
+          <article class="benefit-card">
+            <div class="benefit-icon" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 20.25S4.5 15.75 4.5 9.75C4.5 7.40279 6.40279 5.5 8.75 5.5C10.1924 5.5 11.4671 6.22016 12 7.32265C12.5329 6.22016 13.8076 5.5 15.25 5.5C17.5972 5.5 19.5 7.40279 19.5 9.75C19.5 15.75 12 20.25 12 20.25Z"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <h3>Atención personalizada</h3>
+            <p>Cuidamos de cada cliente como parte de nuestra familia</p>
+          </article>
+
+          <article class="benefit-card">
+            <div class="benefit-icon" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 3.75L18 6V11.625C18 15.2812 15.75 18.6094 12 20.25C8.25 18.6094 6 15.2812 6 11.625V6L12 3.75Z"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <h3>Productos certificados</h3>
+            <p>Solo trabajamos con medicamentos de calidad garantizada</p>
+          </article>
+
+          <article class="benefit-card">
+            <div class="benefit-icon" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 7.5V12L15 13.5"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M12 20.25C16.5563 20.25 20.25 16.5563 20.25 12C20.25 7.44365 16.5563 3.75 12 3.75C7.44365 3.75 3.75 7.44365 3.75 12C3.75 16.5563 7.44365 20.25 12 20.25Z"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <h3>Horario extendido</h3>
+            <p>Estamos disponibles cuando más nos necesitas</p>
+          </article>
+        </div>
+      </section>
     </header>
 
     <footer class="footer">
