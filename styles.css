@@ -122,7 +122,9 @@ body {
   color: #0f73d8;
   background-color: #f3f8ff;
   border: 1px solid #d6e5f5;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .cart-button:hover {
@@ -203,7 +205,7 @@ body {
 
 .bg {
   position: absolute;
-  width: 500px;
+  width: 600px;
   top: 0;
   right: 0;
   z-index: -1;
