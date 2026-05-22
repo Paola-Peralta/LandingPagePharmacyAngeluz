@@ -859,6 +859,84 @@ body {
   transform: translateX(4px);
 }
 
+.discount-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(16, 35, 63, 0.58);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 5000;
+}
+
+.discount-modal.show {
+  display: flex;
+}
+
+.discount-modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  min-height: 280px;
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 42px 32px 34px;
+  text-align: center;
+  box-shadow: 0 28px 70px rgba(15, 33, 56, 0.28);
+  border: 1px solid #d7e6f5;
+  animation: modalFadeIn 0.25s ease;
+}
+
+.discount-modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 50%;
+  background: #f2f7ff;
+  color: #10233f;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.discount-modal-close:hover {
+  background: #0f73d8;
+  color: #ffffff;
+}
+
+.discount-modal-icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0f73d8, #0047a3);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  box-shadow: 0 16px 32px rgba(15, 115, 216, 0.24);
+}
+
+.discount-modal-content h2 {
+  font-size: 28px;
+  color: #10233f;
+  margin-bottom: 10px;
+}
+
+.discount-modal-content p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #5f6f83;
+}
+
 .about-section {
   position: relative;
   padding: 30px 20px 38px;

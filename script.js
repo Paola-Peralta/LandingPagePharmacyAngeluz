@@ -64,7 +64,7 @@ async function handleContactSubmit(event) {
   const payload = {
     Nombre: formData.get("full_name")?.toString().trim(),
     correo: formData.get("email")?.toString().trim(),
-    "Teléfono": formData.get("phone")?.toString().trim() || null,
+    Teléfono: formData.get("phone")?.toString().trim() || null,
     Mensaje: formData.get("message")?.toString().trim(),
   };
 
@@ -84,7 +84,9 @@ async function handleContactSubmit(event) {
 
   if (error) {
     console.error("Supabase insert error:", error);
-    const errorParts = [error.message, error.details, error.hint].filter(Boolean);
+    const errorParts = [error.message, error.details, error.hint].filter(
+      Boolean,
+    );
     setFeedback(
       `No pudimos enviar tu mensaje. ${errorParts.join(" | ") || "Revisa la tabla y la policy de Supabase."}`,
       "error",
@@ -97,3 +99,27 @@ async function handleContactSubmit(event) {
 }
 
 contactForm?.addEventListener("submit", handleContactSubmit);
+
+const openDiscountModal = document.getElementById("openDiscountModal");
+const closeDiscountModal = document.getElementById("closeDiscountModal");
+const discountModal = document.getElementById("discountModal");
+
+openDiscountModal.addEventListener("click", () => {
+  discountModal.classList.add("show");
+});
+
+closeDiscountModal.addEventListener("click", () => {
+  discountModal.classList.remove("show");
+});
+
+discountModal.addEventListener("click", (event) => {
+  if (event.target === discountModal) {
+    discountModal.classList.remove("show");
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    discountModal.classList.remove("show");
+  }
+});
