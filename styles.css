@@ -61,7 +61,7 @@ body {
   align-items: center;
   font-size: 18px;
   color: #1d2430;
-  font-weight: 800;
+  font-weight: 500;
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -205,7 +205,7 @@ body {
 
 .bg {
   position: absolute;
-  width: 600px;
+  width: 400px;
   top: 0;
   right: 0;
   z-index: -1;
@@ -228,10 +228,10 @@ body {
 }
 
 .header-txt {
-  width: 50%;
+  width: 65%;
   margin-right: 50px;
   margin-top: -32px;
-  max-width: 620px;
+  max-width: 760px;
 }
 
 .header-txt h1 {
@@ -261,7 +261,7 @@ body {
 }
 
 .header-description {
-  max-width: 540px;
+  max-width: 940px;
   font-size: 16px;
   line-height: 1.85;
   color: #586476;
@@ -271,16 +271,22 @@ body {
 }
 
 .header-img img {
-  width: 600px;
+  width: 300px;
   margin-top: 10px;
+}
+
+.slider-content.container {
+  max-width: 100%;
+  width: 90%;
 }
 
 .mySwiper-1 {
   width: 100%;
-  max-width: 1240px;
-  padding: 8px 68px 42px 34px;
+  max-width: 2800px;
+  padding: 8px 30px 42px;
   border-radius: 30px;
   background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
+  margin: 0 auto;
 }
 
 .swiper-slide {
@@ -295,11 +301,11 @@ body {
 .slider {
   display: block;
   width: 100%;
-  max-width: 1160px;
+  max-width: 2750px;
   height: auto;
   margin: 0 auto;
   object-fit: contain;
-  transform: translateX(4px);
+  transform: none;
 }
 
 .swiper-button-prev::after {
@@ -330,7 +336,8 @@ body {
 }
 
 .benefits {
-  padding: 70px 0 85px;
+  padding: 80px 20px 90px;
+  background: linear-gradient(180deg, #ffffff 0%, #f4f9ff 100%);
 }
 
 .benefits-grid {
@@ -340,25 +347,34 @@ body {
 }
 
 .benefit-card {
-  background-color: #ffffff;
-  border: 1px solid #d6e2ee;
-  border-radius: 18px;
-  box-shadow: 0 8px 18px rgba(29, 29, 29, 0.08);
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  border: 1px solid #cfe1f4;
+  border-radius: 24px;
+  box-shadow: 0 18px 35px rgba(15, 115, 216, 0.09);
   text-align: center;
-  padding: 24px 28px 26px;
-  min-height: 185px;
+  padding: 34px 32px 32px;
+  min-height: 210px;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.benefit-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 45px rgba(15, 115, 216, 0.16);
 }
 
 .benefit-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  margin: 0 auto 18px;
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  margin: 0 auto 22px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #0072e3;
-  background-color: #eef6ff;
+  color: #0f73d8;
+  background: linear-gradient(135deg, #eaf5ff 0%, #d9ecff 100%);
+  box-shadow: 0 10px 20px rgba(15, 115, 216, 0.12);
 }
 
 .benefit-icon svg {
@@ -381,37 +397,61 @@ body {
 }
 
 .marcas {
-  padding: 60px 20px;
+  padding: 70px 20px 90px;
   text-align: center;
+  background: linear-gradient(180deg, #f4f9ff 0%, #ffffff 100%);
+}
+.marcas h3 {
+  font-size: 42px;
+  color: #10233f;
+  margin-bottom: 15px;
+  font-weight: 800;
+  position: relative;
 }
 
-.marcas h3 {
-  font-size: 32px;
-  color: #1d2430;
-  margin-bottom: 35px;
+.marcas h3::after {
+  content: "";
+  width: 90px;
+  height: 5px;
+  background: linear-gradient(90deg, #0f73d8, #edb40c);
+  border-radius: 20px;
+  display: block;
+  margin: 14px auto 0;
 }
 
 .marcas-content {
-  max-width: 1240px;
-  margin: 0 auto;
+  max-width: 1150px;
+  margin: 45px auto 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 35px;
-  flex-wrap: nowrap;
+  gap: 34px;
+  flex-wrap: wrap;
 }
 
 .marcas-1 {
-  width: 180px;
-  height: 110px;
+  width: 200px;
+  height: 200px;
+  background: #ffffff;
+  border: 1px solid #cfe1f4;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 18px 35px rgba(15, 115, 216, 0.12);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.marcas-1:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 45px rgba(15, 115, 216, 0.18);
 }
 
 .marcas-1 img {
   width: 100%;
-  max-width: 160px;
+  max-width: 140px;
   height: auto;
   object-fit: contain;
 }
