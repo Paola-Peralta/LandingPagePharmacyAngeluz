@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LandingPage</title>
+    <title>Farmacia Angeluz</title>
     <link rel="stylesheet" href="styles.css" />
     <link
       rel="stylesheet"
@@ -26,7 +26,7 @@
           <ul>
             <li><a href="#inicio">Inicio</a></li>
             <li><a href="#">Productos</a></li>
-            <li><a href="#">Consultas</a></li>
+            <li><a href="#contacto">Consultas</a></li>
             <li><a href="#">Acerca de nosotros</a></li>
           </ul>
         </nav>
@@ -189,10 +189,174 @@
       </section>
     </header>
 
+    <section id="contacto" class="contact-section">
+      <div class="contact-wrapper container">
+        <div class="contact-heading">
+          <h2>Contáctanos</h2>
+          <p>¿Tienes alguna pregunta? Estamos aquí para ayudarte</p>
+        </div>
+
+        <div class="contact-content">
+          <div class="contact-card">
+            <form id="contact-form" class="contact-form">
+              <label class="contact-field">
+                <span>Nombre completo</span>
+                <input
+                  type="text"
+                  name="full_name"
+                  placeholder="Tu nombre"
+                  autocomplete="name"
+                  required
+                />
+              </label>
+
+              <label class="contact-field">
+                <span>Correo electrónico</span>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="tu@email.com"
+                  autocomplete="email"
+                  required
+                />
+              </label>
+
+              <label class="contact-field">
+                <span>Teléfono</span>
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="(505) 7672-0658"
+                  autocomplete="tel"
+                />
+              </label>
+
+              <label class="contact-field">
+                <span>Mensaje</span>
+                <textarea
+                  name="message"
+                  rows="4"
+                  placeholder="¿En qué podemos ayudarte?"
+                  required
+                ></textarea>
+              </label>
+
+              <button type="submit" class="contact-submit">
+                Enviar mensaje
+              </button>
+              <p id="form-feedback" class="form-feedback" aria-live="polite"></p>
+            </form>
+          </div>
+
+          <div class="contact-details" aria-label="Información de contacto">
+            <article class="contact-detail">
+              <div class="contact-detail-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 13.5C13.6569 13.5 15 12.1569 15 10.5C15 8.84315 13.6569 7.5 12 7.5C10.3431 7.5 9 8.84315 9 10.5C9 12.1569 10.3431 13.5 12 13.5Z"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M19.5 10.5C19.5 16.125 12 21 12 21C12 21 4.5 16.125 4.5 10.5C4.5 6.35786 7.85786 3 12 3C16.1421 3 19.5 6.35786 19.5 10.5Z"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+              <div class="contact-detail-copy">
+                <h3>Dirección</h3>
+                <p>Mercado de Masaya</p>
+              </div>
+            </article>
+
+            <article class="contact-detail">
+              <div class="contact-detail-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M6.75 4.5H9C9.41421 4.5 9.75 4.83579 9.75 5.25V7.63962C9.75 7.92698 9.58515 8.18889 9.32594 8.31351L7.70562 9.09206C8.6811 11.2495 10.4505 13.0189 12.6079 13.9944L13.3865 12.3741C13.5111 12.1149 13.773 11.95 14.0604 11.95H16.5C16.9142 11.95 17.25 12.2858 17.25 12.7V14.95C17.25 16.3997 16.0747 17.575 14.625 17.575H13.5C8.52944 17.575 4.5 13.5456 4.5 8.575V7.125C4.5 5.67525 5.67525 4.5 7.125 4.5H6.75Z"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+              <div class="contact-detail-copy">
+                <h3>Teléfono</h3>
+                <p><a href="tel:+50576720658">(505) 7672-0658</a></p>
+              </div>
+            </article>
+
+            <article class="contact-detail">
+              <div class="contact-detail-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M3.75 7.5L10.9393 12.5335C11.5819 12.9834 12.4181 12.9834 13.0607 12.5335L20.25 7.5"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M4.5 6H19.5C20.3284 6 21 6.67157 21 7.5V16.5C21 17.3284 20.3284 18 19.5 18H4.5C3.67157 18 3 17.3284 3 16.5V7.5C3 6.67157 3.67157 6 4.5 6Z"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+              <div class="contact-detail-copy">
+                <h3>Correo electrónico</h3>
+                <p>
+                  <a href="mailto:contacto@farmaciaangeluz.com">
+                    contacto@farmaciaangeluz.com
+                  </a>
+                </p>
+              </div>
+            </article>
+
+            <article class="contact-detail">
+              <div class="contact-detail-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 6V12L15 15"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+              <div class="contact-detail-copy">
+                <h3>Horario de atención</h3>
+                <div class="contact-schedule">
+                  <p>Lunes a Sábado: 7:00 AM - 5:00 PM</p>
+                  <p>Domingo: 7:00 AM - 5:00 PM</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <footer class="footer">
       <div></div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
   </body>
 </html>
