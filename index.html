@@ -413,20 +413,73 @@
       </section>
 
       <section>
-      <div class="discount-modal" id="discountModal">
-        <div class="discount-modal-content">
-          <button class="discount-modal-close" id="closeDiscountModal" type="button">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
+      <section class="discount-modal" id="discountModal">
+  <div class="discount-modal-content discount-form-modal">
+    <button class="discount-modal-close" id="closeDiscountModal" type="button">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
 
-          <div class="discount-modal-icon">
-            <i class="fa-solid fa-gift"></i>
-          </div>
+    <div class="discount-modal-icon">
+      <i class="fa-solid fa-gift"></i>
+    </div>
 
-          <h2>Modal de descuentos</h2>
-          <p>Aquí irá el formulario de registro para recibir promociones especiales.</p>
-        </div>
-      </div>
+    <h2>Obtén descuentos exclusivos en medicamentos</h2>
+    <p class="discount-modal-description">
+      Déjanos tus datos y recibe promociones, ofertas y consejos de salud
+      directamente en tu celular.
+    </p>
+
+    <form class="discount-form" id="discountForm">
+      <label class="discount-field">
+        <span>Nombre completo</span>
+        <input
+          type="text"
+          name="nombre"
+          placeholder="Tu nombre completo"
+          required
+        />
+      </label>
+
+      <label class="discount-field">
+        <span>Teléfono (WhatsApp)</span>
+        <input
+          type="tel"
+          name="telefono"
+          placeholder="505 7672-0658"
+          required
+        />
+      </label>
+
+      <label class="discount-field">
+        <span>Correo electrónico <small>(opcional)</small></span>
+        <input
+          type="email"
+          name="correo"
+          placeholder="tu@email.com"
+        />
+      </label>
+
+      <label class="discount-field discount-select-field">
+        <span>Tipo de interés</span>
+        <select name="interes" required>
+          <option value="">Selecciona una opción</option>
+          <option value="Vitaminas">Vitaminas</option>
+          <option value="Medicamento">Medicamento</option>
+          <option value="Cuidado personal">Cuidado personal</option>
+          <option value="Promociones">Promociones</option>
+        </select>
+      </label>
+
+      <button class="discount-submit" type="submit">
+        Quiero mi descuento
+      </button>
+
+      <p class="discount-note">
+        Recibe <strong>10% de descuento</strong> en tu primera compra.
+      </p>
+    </form>
+  </div>
+</section>
       </section>
 
       <section id="acercadenosotros" class="about-section">

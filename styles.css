@@ -937,6 +937,123 @@ body {
   color: #5f6f83;
 }
 
+.discount-form-modal {
+  max-width: 500px;
+  padding: 24px 26px 22px;
+  text-align: center;
+}
+
+.discount-form-modal .discount-modal-icon {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 12px;
+  font-size: 23px;
+}
+
+.discount-form-modal h2 {
+  max-width: 420px;
+  margin: 0 auto 8px;
+  font-size: 23px;
+  line-height: 1.16;
+  color: #10233f;
+  font-weight: 800;
+}
+
+.discount-modal-description {
+  max-width: 420px;
+  margin: 0 auto 16px;
+  font-size: 13px;
+  line-height: 1.49;
+  color: #5f6f83;
+}
+
+.discount-form {
+  display: grid;
+  gap: 11px;
+  text-align: left;
+}
+
+.discount-field {
+  display: grid;
+  gap: 6px;
+}
+
+.discount-field span {
+  font-size: 13px;
+  font-weight: 800;
+  color: #10233f;
+}
+
+.discount-field small {
+  font-size: 12px;
+  font-weight: 600;
+  color: #5f6f83;
+}
+
+.discount-field input,
+.discount-field select {
+  width: 100%;
+  min-height: 40px;
+  border: 1px solid #d5e4f2;
+  border-radius: 11px;
+  padding: 0 13px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 13px;
+  color: #20324c;
+  background-color: #ffffff;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.discount-field input::placeholder {
+  color: #8796aa;
+}
+
+.discount-field input:focus,
+.discount-field select:focus {
+  border-color: #0f73d8;
+  box-shadow: 0 0 0 4px rgba(15, 115, 216, 0.13);
+}
+
+.discount-select-field select {
+  cursor: pointer;
+}
+
+.discount-submit {
+  margin-top: 4px;
+  border: 0;
+  min-height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0f73d8 0%, #0047a3 100%);
+  color: #ffffff;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 12px 24px rgba(15, 115, 216, 0.22);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.discount-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 30px rgba(15, 115, 216, 0.28);
+}
+
+.discount-note {
+  margin-top: 2px;
+  text-align: center;
+  font-size: 12px;
+  color: #5f6f83;
+}
+
+.discount-note strong {
+  color: #0f73d8;
+}
+
 .about-section {
   position: relative;
   padding: 30px 20px 38px;
