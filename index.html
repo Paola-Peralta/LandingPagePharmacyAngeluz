@@ -31,6 +31,7 @@
             <li><a href="#inicio">Inicio</a></li>
             <li><a href="#">Productos</a></li>
             <li><a href="#contacto">Contacto</a></li>
+            <li><a href="#">Descuento</a></li>
             <li><a href="#acercadenosotros">Acerca de nosotros</a></li>
           </ul>
         </nav>
@@ -424,14 +425,11 @@
     </div>
 
     <h2>Obtén descuentos exclusivos en medicamentos</h2>
-    <p class="discount-modal-description">
-      Déjanos tus datos y recibe promociones, ofertas y consejos de salud
-      directamente en tu celular.
-    </p>
+    
 
     <form class="discount-form" id="discountForm">
       <label class="discount-field">
-        <span>Nombre completo</span>
+        <span>Nombre</span>
         <input
           type="text"
           name="nombre"
@@ -441,43 +439,98 @@
       </label>
 
       <label class="discount-field">
-        <span>Teléfono (WhatsApp)</span>
+        <span>Edad</span>
         <input
-          type="tel"
-          name="telefono"
-          placeholder="505 7672-0658"
+          type="number"
+          name="edad"
+          placeholder="Tu edad"
+          min="1"
+          max="120"
           required
         />
       </label>
 
+      <label class="discount-field discount-select-field">
+        <span>Género</span>
+        <select name="genero" required>
+          <option value="">Selecciona una opción</option>
+          <option value="Femenino">Femenino</option>
+          <option value="Masculino">Masculino</option>
+        </select>
+      </label>
+
       <label class="discount-field">
-        <span>Correo electrónico <small>(opcional)</small></span>
+        <span>Teléfono</span>
         <input
-          type="email"
-          name="correo"
-          placeholder="tu@email.com"
+          type="tel"
+          name="telefono"
+          placeholder="Tu número de teléfono"
+          required
         />
       </label>
 
       <label class="discount-field discount-select-field">
-        <span>Tipo de interés</span>
-        <select name="interes" required>
+        <span>Conducta online</span>
+        <select name="conducta_online" required>
+          <option value="">Selecciona una opción</option>
+          <option value="Consulta por WhatsApp">Consulta por WhatsApp</option>
+          <option value="Compra en línea">Compra en línea</option>
+          <option value="Solo consulta información">Solo consulta información</option>
+        </select>
+      </label>
+
+      <label class="discount-field discount-select-field">
+        <span>Intereses</span>
+        <select name="intereses" required>
           <option value="">Selecciona una opción</option>
           <option value="Vitaminas">Vitaminas</option>
           <option value="Medicamento">Medicamento</option>
           <option value="Cuidado personal">Cuidado personal</option>
           <option value="Promociones">Promociones</option>
+          <option value="Salud general">Salud general</option>
+          <option value="Bebés y niños">Bebés y niños</option>
         </select>
       </label>
 
-      <button class="discount-submit" type="submit">
+      <label class="discount-field discount-select-field">
+        <span>Frecuencia de consumo</span>
+        <select name="frecuencia_de_consumo" required>
+          <option value="">Selecciona una opción</option>
+          <option value="Diaria">Diaria</option>
+          <option value="Semanal">Semanal</option>
+          <option value="Quincenal">Quincenal</option>
+          <option value="Mensual">Mensual</option>
+          <option value="Bimestral">Bimestral</option>
+          <option value="Trimestral">Trimestral</option>
+          <option value="Ocasional">Ocasional</option>
+          <option value="Solo cuando lo necesito">Solo cuando lo necesito</option>
+        </select>
+      </label>
+
+      <label class="discount-field">
+        <span>Dirección</span>
+        <input
+          type="text"
+          name="direccion"
+          placeholder="Tu dirección"
+          required
+        />
+      </label>
+
+    </form>
+
+    <div class="discount-actions">
+      <p id="discount-feedback" class="form-feedback" aria-live="polite"></p>
+      <p class="discount-note">
+        Recibe <strong>10% de descuento</strong> 
+      </p>
+      <button class="discount-submit" type="submit" form="discountForm">
         Quiero mi descuento
       </button>
-
-      <p class="discount-note">
-        Recibe <strong>10% de descuento</strong> en tu primera compra.
-      </p>
-    </form>
+    </div>
+    
+  </div>
+</section>
   </div>
 </section>
       </section>
@@ -692,6 +745,18 @@
       </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <!-- WhatsApp floating button -->
+    <a
+      class="whatsapp-float"
+      href="https://wa.me/50576720658?text=Hola%20Farmacia%20Angeluz%20%F0%9F%98%8A%20Quiero%20consultar%20ahora"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Contactar por WhatsApp"
+    >
+      <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+      <span>Consultar ahora</span>
+    </a>
+
     <script type="module" src="script.js"></script>
   </body>
 </html>

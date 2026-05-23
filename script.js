@@ -21,6 +21,11 @@ const contactForm = document.querySelector("#contact-form");
 const feedbackElement = document.querySelector("#form-feedback");
 const submitButton = contactForm?.querySelector('button[type="submit"]');
 const defaultButtonLabel = submitButton?.textContent ?? "Enviar mensaje";
+const discountForm = document.querySelector("#discountForm");
+const discountFeedbackElement = document.querySelector("#discount-feedback");
+const discountSubmitButton = discountForm?.querySelector('button[type="submit"]');
+const defaultDiscountButtonLabel =
+  discountSubmitButton?.textContent ?? "Quiero mi descuento";
 
 const hasSupabaseConfig =
   Boolean(SUPABASE_CONFIG?.url) &&
@@ -32,16 +37,33 @@ const supabase = hasSupabaseConfig
   ? createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey)
   : null;
 
-function setFeedback(message, state = "") {
-  if (!feedbackElement) {
+function setElementFeedback(element, message, state = "") {
+  if (!element) {
     return;
   }
 
-  feedbackElement.textContent = message;
-  feedbackElement.className = "form-feedback";
+  element.textContent = message;
+  element.className = "form-feedback";
 
   if (state) {
-    feedbackElement.classList.add(`is-${state}`);
+    element.classList.add(`is-${state}`);
+  }
+}
+
+function setFeedback(message, state = "") {
+  setElementFeedback(feedbackElement, message, state);
+}
+
+function setDiscountFeedback(message, state = "") {
+  setElementFeedback(discountFeedbackElement, message, state);
+
+  // Asegurar que el mensaje de feedback sea visible dentro del modal
+  try {
+    if (discountFeedbackElement && typeof discountFeedbackElement.scrollIntoView === "function") {
+      discountFeedbackElement.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  } catch (e) {
+    // no-op
   }
 }
 
@@ -100,26 +122,113 @@ async function handleContactSubmit(event) {
 
 contactForm?.addEventListener("submit", handleContactSubmit);
 
+async function handleDiscountSubmit(event) {
+  event.preventDefault();
+
+  if (!discountForm || !discountSubmitButton) {
+    return;
+  }
+
+  if (!supabase) {
+    setDiscountFeedback(
+      "Configura tu proyecto en supabase/config.js antes de enviar el formulario.",
+      "error",
+    );
+    return;
+  }
+
+  const formData = new FormData(discountForm);
+  const payload = {
+    Nombre: formData.get("nombre")?.toString().trim(),
+    Edad: Number(formData.get("edad")),
+    "Género": formData.get("genero")?.toString().trim(),
+    "Teléfono": formData.get("telefono")?.toString().trim(),
+    Conducta_online: formData.get("conducta_online")?.toString().trim(),
+    Intereses: formData.get("intereses")?.toString().trim(),
+    Frecuencia_de_consumo: formData
+      .get("frecuencia_de_consumo")
+      ?.toString()
+      .trim(),
+    "Dirección": formData.get("direccion")?.toString().trim(),
+  };
+
+  if (
+    !payload.Nombre ||
+    !Number.isFinite(payload.Edad) ||
+    payload.Edad < 1 ||
+    !payload["Género"] ||
+    !payload["Teléfono"] ||
+    !payload.Conducta_online ||
+    !payload.Intereses ||
+    !payload.Frecuencia_de_consumo ||
+    !payload["Dirección"]
+  ) {
+    setDiscountFeedback(
+      "Completa todos los campos obligatorios para continuar.",
+      "error",
+    );
+    return;
+  }
+
+  // Validar rango de edad para aplicar descuento (40-70 años)
+  if (payload.Edad < 40 || payload.Edad > 70) {
+    setDiscountFeedback(
+      "No cumples con la edad requerida para el descuento (40-70 años).",
+      "error",
+    );
+    return;
+  }
+
+  discountSubmitButton.disabled = true;
+  discountSubmitButton.textContent = "Enviando...";
+  setDiscountFeedback("Enviando tu registro...", "pending");
+
+  const { error } = await supabase.from("Descuento").insert(payload);
+
+  discountSubmitButton.disabled = false;
+  discountSubmitButton.textContent = defaultDiscountButtonLabel;
+
+  if (error) {
+    console.error("Supabase insert error:", error);
+    const errorParts = [error.message, error.details, error.hint].filter(
+      Boolean,
+    );
+    setDiscountFeedback(
+      `No pudimos registrar tu descuento. ${errorParts.join(" | ") || "Revisa la tabla y la policy de Supabase."}`,
+      "error",
+    );
+    return;
+  }
+
+  discountForm.reset();
+  setDiscountFeedback(
+    "Registro enviado con éxito. Pronto recibirás promociones y descuentos.",
+    "success",
+  );
+}
+
+discountForm?.addEventListener("submit", handleDiscountSubmit);
+
 const openDiscountModal = document.getElementById("openDiscountModal");
 const closeDiscountModal = document.getElementById("closeDiscountModal");
 const discountModal = document.getElementById("discountModal");
 
-openDiscountModal.addEventListener("click", () => {
-  discountModal.classList.add("show");
+openDiscountModal?.addEventListener("click", () => {
+  discountModal?.classList.add("show");
 });
 
-closeDiscountModal.addEventListener("click", () => {
-  discountModal.classList.remove("show");
+closeDiscountModal?.addEventListener("click", () => {
+  discountModal?.classList.remove("show");
 });
 
-discountModal.addEventListener("click", (event) => {
+discountModal?.addEventListener("click", (event) => {
   if (event.target === discountModal) {
     discountModal.classList.remove("show");
   }
 });
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
+  if (event.key === "Escape" && discountModal) {
     discountModal.classList.remove("show");
   }
 });
