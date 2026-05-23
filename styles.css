@@ -751,6 +751,7 @@ body {
 }
 
 .mothers-section {
+  scroll-margin-top: 100px;
   padding: 35px 24px 28px;
   background: linear-gradient(180deg, #ffffff 0%, #fff4f8 100%);
 }
