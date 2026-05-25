@@ -23,7 +23,9 @@ const submitButton = contactForm?.querySelector('button[type="submit"]');
 const defaultButtonLabel = submitButton?.textContent ?? "Enviar mensaje";
 const discountForm = document.querySelector("#discountForm");
 const discountFeedbackElement = document.querySelector("#discount-feedback");
-const discountSubmitButton = discountForm?.querySelector('button[type="submit"]');
+const discountSubmitButton = document.querySelector(
+  'button[type="submit"][form="discountForm"]',
+);
 const defaultDiscountButtonLabel =
   discountSubmitButton?.textContent ?? "Quiero mi descuento";
 
@@ -56,15 +58,6 @@ function setFeedback(message, state = "") {
 
 function setDiscountFeedback(message, state = "") {
   setElementFeedback(discountFeedbackElement, message, state);
-
-  // Asegurar que el mensaje de feedback sea visible dentro del modal
-  try {
-    if (discountFeedbackElement && typeof discountFeedbackElement.scrollIntoView === "function") {
-      discountFeedbackElement.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  } catch (e) {
-    // no-op
-  }
 }
 
 async function handleContactSubmit(event) {
@@ -170,10 +163,9 @@ async function handleDiscountSubmit(event) {
     return;
   }
 
-  // Validar rango de edad para aplicar descuento (40-70 años)
   if (payload.Edad < 40 || payload.Edad > 70) {
     setDiscountFeedback(
-      "No cumples con la edad requerida para el descuento (40-70 años).",
+      "El descuento solo aplica para clientes entre 40 y 70 años.",
       "error",
     );
     return;
@@ -205,6 +197,17 @@ async function handleDiscountSubmit(event) {
     "Registro enviado con éxito. Pronto recibirás promociones y descuentos.",
     "success",
   );
+  // Ocultar el mensaje de éxito y cerrar el modal automáticamente
+  setTimeout(() => {
+    setDiscountFeedback("", "");
+    try {
+      if (discountModal) {
+        discountModal.classList.remove("show");
+      }
+    } catch (e) {
+      // no-op
+    }
+  }, 4000);
 }
 
 discountForm?.addEventListener("submit", handleDiscountSubmit);
