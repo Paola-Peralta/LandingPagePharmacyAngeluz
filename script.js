@@ -230,8 +230,4 @@ discountModal?.addEventListener("click", (event) => {
   }
 });
 
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && discountModal) {
-    discountModal.classList.remove("show");
-  }
-});
+// (contact modal removed) menu now links directly to the on-page contact form (#contacto)

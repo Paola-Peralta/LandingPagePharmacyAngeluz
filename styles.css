@@ -70,6 +70,14 @@ body {
   display: inline-block;
 }
 
+.logo-img {
+  width: 88px;
+  height: auto;
+  display: inline-block;
+  margin-right: 10px;
+  object-fit: contain;
+}
+
 .menu .navbar {
   flex: 1;
   display: flex;
@@ -228,9 +236,9 @@ body {
 }
 
 .header-txt {
-  width: 65%;
-  margin-right: 50px;
-  margin-top: -32px;
+  width: 60%;
+  margin-right: 20px;
+  margin-top: 12px;
   max-width: 760px;
 }
 
@@ -270,9 +278,19 @@ body {
   text-wrap: pretty;
 }
 
+.header-img {
+  width: 36%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .header-img img {
-  width: 300px;
-  margin-top: 10px;
+  width: 220px;
+  max-width: 100%;
+  height: auto;
+  margin-top: 6px;
+  display: block;
 }
 
 .slider-content.container {
