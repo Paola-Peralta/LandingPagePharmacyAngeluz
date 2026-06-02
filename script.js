@@ -13,6 +13,24 @@ const supabase = hasSupabaseConfig
 
 const productosLista = document.querySelector("#productos-lista");
 
+function scrollToProductos(event) {
+  const target = document.querySelector("#productos");
+
+  if (!target) {
+    return;
+  }
+
+  event.preventDefault();
+  history.pushState(null, "", "#productos");
+  target.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  const menuCheckbox = document.querySelector("#menu");
+
+  if (menuCheckbox) {
+    menuCheckbox.checked = false;
+  }
+}
+
 async function cargarProductos() {
   if (!productosLista) {
     return;
@@ -79,6 +97,13 @@ async function cargarProductos() {
 }
 
 cargarProductos();
+
+document.querySelectorAll("a").forEach((link) => {
+  if (link.textContent?.trim() === "Productos") {
+    link.addEventListener("click", scrollToProductos);
+  }
+});
+
 if (document.querySelector(".mySwiper-1") && typeof Swiper !== "undefined") {
   new Swiper(".mySwiper-1", {
     slidesPerView: 1,
