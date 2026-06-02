@@ -498,6 +498,114 @@ body {
   object-fit: contain;
 }
 
+.productos {
+  padding: 80px 20px;
+  background-color: #f4fbf7;
+  text-align: center;
+  position: relative;
+  z-index: 5;
+  opacity: 1 !important;
+}
+
+.productos * {
+  opacity: 1 !important;
+}
+
+.productos h2 {
+  font-size: 38px;
+  color: #163b2f;
+  margin-bottom: 10px;
+}
+
+.productos-texto {
+  font-size: 16px;
+  color: #5f6f68;
+  margin-bottom: 45px;
+}
+
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 28px;
+}
+
+.producto-card {
+  background-color: #ffffff;
+  border-radius: 22px;
+  padding: 20px;
+  box-shadow: 0 12px 30px rgba(26, 91, 70, 0.12);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.producto-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 40px rgba(255, 255, 255, 0.2);
+}
+
+.producto-img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  background-color: #ffffff;
+  border-radius: 18px;
+  padding: 15px;
+  margin-bottom: 18px;
+}
+
+.producto-info h3 {
+  font-size: 20px;
+  color: #163b2f;
+  margin-bottom: 8px;
+}
+
+.producto-info p {
+  font-size: 14px;
+  color: #67736d;
+  margin-bottom: 8px;
+}
+
+.producto-categoria {
+  display: inline-block;
+  background-color: #dff5e9;
+  color: #0f73d8;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.producto-info h4 {
+  font-size: 22px;
+  color: #0f73d8;
+  margin: 10px 0 16px;
+}
+
+.producto-info .btn-3,
+.agregar-carrito {
+  width: 100%;
+  border: none;
+  background: linear-gradient(135deg, #0f73d8, #0f73d8);
+  color: #ffffff;
+  padding: 13px 18px;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.producto-info .btn-3:hover,
+.agregar-carrito:hover {
+  transform: scale(1.03);
+  opacity: 0.9;
+}
+
 .contact-section {
   position: relative;
   padding: 20px 24px 34px;
@@ -1075,7 +1183,9 @@ body {
   font-weight: 800;
   cursor: pointer;
   box-shadow: 0 12px 30px rgba(15, 115, 216, 0.22);
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
   display: block;
 }
 

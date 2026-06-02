@@ -1,6 +1,84 @@
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 import { SUPABASE_CONFIG } from "./supabase/config.js";
 
+const hasSupabaseConfig =
+  Boolean(SUPABASE_CONFIG?.url) &&
+  Boolean(SUPABASE_CONFIG?.anonKey) &&
+  !SUPABASE_CONFIG.url.includes("TU-PROYECTO") &&
+  !SUPABASE_CONFIG.anonKey.includes("TU_SUPABASE");
+
+const supabase = hasSupabaseConfig
+  ? createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey)
+  : null;
+
+const productosLista = document.querySelector("#productos-lista");
+
+async function cargarProductos() {
+  if (!productosLista) {
+    return;
+  }
+
+  if (!supabase) {
+    productosLista.innerHTML = `
+      <p>No se pudo conectar con Supabase. Revisa tu archivo supabase/config.js.</p>
+    `;
+    return;
+  }
+
+  productosLista.innerHTML = "<p>Cargando productos...</p>";
+
+  const { data, error } = await supabase
+    .from("Producto")
+    .select("id, Nombre, Precio, Presentación, Categoría, Imagen_url")
+    .order("id", { ascending: true });
+
+  if (error) {
+    console.error("Error al cargar productos:", error);
+    productosLista.innerHTML = `
+      <p>No se pudieron cargar los productos. Revisa la tabla o las políticas RLS.</p>
+    `;
+    return;
+  }
+
+  console.log("Productos cargados:", data);
+
+  if (!data || data.length === 0) {
+    productosLista.innerHTML = "<p>No hay productos disponibles.</p>";
+    return;
+  }
+
+  productosLista.innerHTML = data
+    .map((producto) => {
+      return `
+        <div class="producto-card">
+          <img 
+            src="${producto.Imagen_url}" 
+            alt="${producto.Nombre}" 
+            class="producto-img"
+          />
+
+          <div class="producto-info">
+            <h3>${producto.Nombre}</h3>
+            <p>${producto["Presentación"]}</p>
+            <span class="producto-categoria">${producto["Categoría"]}</span>
+            <h4>C$${producto.Precio}</h4>
+
+            <button 
+              class="btn-3 agregar-carrito"
+              data-id="${producto.id}"
+              data-nombre="${producto.Nombre}"
+              data-precio="${producto.Precio}"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+        </div>
+      `;
+    })
+    .join("");
+}
+
+cargarProductos();
 if (document.querySelector(".mySwiper-1") && typeof Swiper !== "undefined") {
   new Swiper(".mySwiper-1", {
     slidesPerView: 1,
@@ -28,16 +106,6 @@ const discountSubmitButton = document.querySelector(
 );
 const defaultDiscountButtonLabel =
   discountSubmitButton?.textContent ?? "Quiero mi descuento";
-
-const hasSupabaseConfig =
-  Boolean(SUPABASE_CONFIG?.url) &&
-  Boolean(SUPABASE_CONFIG?.anonKey) &&
-  !SUPABASE_CONFIG.url.includes("TU-PROYECTO") &&
-  !SUPABASE_CONFIG.anonKey.includes("TU_SUPABASE");
-
-const supabase = hasSupabaseConfig
-  ? createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey)
-  : null;
 
 function setElementFeedback(element, message, state = "") {
   if (!element) {
@@ -134,15 +202,15 @@ async function handleDiscountSubmit(event) {
   const payload = {
     Nombre: formData.get("nombre")?.toString().trim(),
     Edad: Number(formData.get("edad")),
-    "Género": formData.get("genero")?.toString().trim(),
-    "Teléfono": formData.get("telefono")?.toString().trim(),
+    Género: formData.get("genero")?.toString().trim(),
+    Teléfono: formData.get("telefono")?.toString().trim(),
     Conducta_online: formData.get("conducta_online")?.toString().trim(),
     Intereses: formData.get("intereses")?.toString().trim(),
     Frecuencia_de_consumo: formData
       .get("frecuencia_de_consumo")
       ?.toString()
       .trim(),
-    "Dirección": formData.get("direccion")?.toString().trim(),
+    Dirección: formData.get("direccion")?.toString().trim(),
   };
 
   if (
@@ -197,7 +265,6 @@ async function handleDiscountSubmit(event) {
     "Registro enviado con éxito. Pronto recibirás promociones y descuentos.",
     "success",
   );
-  // Ocultar el mensaje de éxito y cerrar el modal automáticamente
   setTimeout(() => {
     setDiscountFeedback("", "");
     try {
@@ -229,5 +296,3 @@ discountModal?.addEventListener("click", (event) => {
     discountModal.classList.remove("show");
   }
 });
-
-// (contact modal removed) menu now links directly to the on-page contact form (#contacto)
