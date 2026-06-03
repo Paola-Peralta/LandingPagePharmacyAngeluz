@@ -88,6 +88,11 @@
                 <a href="#" id="vaciar-carrito" class="btn-3">Vaciar carrito</a>
               </div>
             </li>
+            <li class="submenu">
+              <a href="#dashboard" class="dashboard-button open-dashboard" aria-label="Abrir dashboard">
+                <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -219,7 +224,7 @@
             <!-- Aquí se cargarán los productos desde Supabase -->
           </div>
         </section>
-        
+
         <section class="marcas">
           <h3>Marcas favoritas</h3>
           <div class="marcas-content">
@@ -703,6 +708,42 @@
         </div>
       </section>
     </main>
+
+    <section class="dashboard-modal" id="dashboardModal" aria-hidden="true">
+      <div class="dashboard-modal__backdrop" data-dashboard-close></div>
+      <div
+        class="dashboard-modal__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="dashboardModalTitle"
+      >
+        <button
+          class="dashboard-modal__close"
+          type="button"
+          data-dashboard-close
+          aria-label="Cerrar dashboard"
+        >
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+        <div class="dashboard-modal__header">
+          <h2 id="dashboardModalTitle">Dashboard de análisis</h2>
+          <p>Visualiza los datos clave del negocio directamente desde Looker Studio.</p>
+        </div>
+        <div class="dashboard-modal__frame">
+          <iframe
+            src="https://datastudio.google.com/embed/reporting/dc12b504-e4c0-4699-b50a-8c60930dbd77/page/P0A0F"
+            title="Dashboard de Looker Studio"
+            loading="lazy"
+            width="1200"
+            height="780"
+            frameborder="0"
+            style="border:0"
+            allowfullscreen
+            sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+          ></iframe>
+        </div>
+      </div>
+    </section>
 
     <footer class="footer">
       <div class="footer-content container">

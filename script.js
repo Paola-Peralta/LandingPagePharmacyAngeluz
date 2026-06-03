@@ -23,12 +23,19 @@ function scrollToProductos(event) {
   event.preventDefault();
   history.pushState(null, "", "#productos");
   target.scrollIntoView({ behavior: "smooth", block: "start" });
+}
 
-  const menuCheckbox = document.querySelector("#menu");
+function scrollToDashboard(event) {
+  const dashboardModal = document.querySelector("#dashboardModal");
 
-  if (menuCheckbox) {
-    menuCheckbox.checked = false;
+  if (!dashboardModal) {
+    return;
   }
+
+  event.preventDefault();
+  history.pushState(null, "", "#dashboard");
+  dashboardModal.classList.add("is-open");
+  dashboardModal.setAttribute("aria-hidden", "false");
 }
 
 async function cargarProductos() {
@@ -101,6 +108,31 @@ cargarProductos();
 document.querySelectorAll("a").forEach((link) => {
   if (link.textContent?.trim() === "Productos") {
     link.addEventListener("click", scrollToProductos);
+  }
+});
+
+document.querySelectorAll(".open-dashboard").forEach((link) => {
+  link.addEventListener("click", scrollToDashboard);
+});
+
+const dashboardModal = document.querySelector("#dashboardModal");
+
+function closeDashboard() {
+  if (!dashboardModal) {
+    return;
+  }
+
+  dashboardModal.classList.remove("is-open");
+  dashboardModal.setAttribute("aria-hidden", "true");
+}
+
+dashboardModal?.querySelectorAll("[data-dashboard-close]").forEach((element) => {
+  element.addEventListener("click", closeDashboard);
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeDashboard();
   }
 });
 
