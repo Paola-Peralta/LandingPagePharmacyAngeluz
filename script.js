@@ -12,6 +12,338 @@ const supabase = hasSupabaseConfig
   : null;
 
 const productosLista = document.querySelector("#productos-lista");
+const cartStorageKey = "farmaciaAngeluzCarrito";
+const whatsappOrderNumber = "50584284943";
+const cartButton = document.querySelector(".cart-button");
+const cartContainer = document.querySelector("#carrito");
+const cartCountElement = document.querySelector("#cart-count");
+const cartTableBody = document.querySelector("#lista-carrito tbody");
+const cartTotalElement = document.querySelector("#cart-total");
+const checkoutCartButton = document.querySelector("#comprar-carrito");
+const emptyCartButton = document.querySelector("#vaciar-carrito");
+
+function parsePrice(value) {
+  const cleanValue = String(value ?? "0")
+    .replace(/[^\d.,-]/g, "")
+    .trim();
+  const normalizedValue =
+    cleanValue.includes(".") && cleanValue.includes(",")
+      ? cleanValue.replace(/,/g, "")
+      : cleanValue.replace(",", ".");
+  const price = Number(normalizedValue);
+
+  return Number.isFinite(price) ? price : 0;
+}
+
+function formatCordobas(value) {
+  return `C$${Number(value).toFixed(2)}`;
+}
+
+function escapeHtml(value) {
+  const div = document.createElement("div");
+  div.textContent = value;
+  return div.innerHTML;
+}
+
+function getSavedCart() {
+  try {
+    const savedCart = window.localStorage.getItem(cartStorageKey);
+    const parsedCart = JSON.parse(savedCart);
+
+    if (!Array.isArray(parsedCart)) {
+      return [];
+    }
+
+    return parsedCart
+      .filter((item) => item?.id && item?.name)
+      .map((item) => ({
+        id: String(item.id),
+        name: String(item.name),
+        price: parsePrice(item.price),
+        quantity: Math.max(1, Number(item.quantity) || 1),
+      }));
+  } catch (error) {
+    console.warn("No se pudo leer el carrito guardado:", error);
+    return [];
+  }
+}
+
+let cartItems = getSavedCart();
+
+function saveCart() {
+  try {
+    window.localStorage.setItem(cartStorageKey, JSON.stringify(cartItems));
+  } catch (error) {
+    console.warn("No se pudo guardar el carrito:", error);
+  }
+}
+
+function renderCart() {
+  const totalQuantity = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0,
+  );
+  const cartTotal = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0,
+  );
+
+  if (cartCountElement) {
+    cartCountElement.textContent = String(totalQuantity);
+    cartCountElement.classList.toggle("is-visible", totalQuantity > 0);
+  }
+
+  if (cartTotalElement) {
+    cartTotalElement.textContent = formatCordobas(cartTotal);
+  }
+
+  if (!cartTableBody) {
+    return;
+  }
+
+  if (cartItems.length === 0) {
+    cartTableBody.innerHTML = `
+      <tr>
+        <td class="cart-empty" colspan="4">Tu carrito está vacío.</td>
+      </tr>
+    `;
+    return;
+  }
+
+  cartTableBody.innerHTML = cartItems
+    .map((item) => {
+      return `
+        <tr>
+          <td>
+            <span class="cart-product-name">${escapeHtml(item.name)}</span>
+            <small>${formatCordobas(item.price)} c/u</small>
+          </td>
+          <td>
+            <div class="cart-quantity">
+              <button
+                class="cart-quantity-btn"
+                type="button"
+                data-cart-action="decrease"
+                data-id="${escapeHtml(item.id)}"
+                aria-label="Quitar una unidad de ${escapeHtml(item.name)}"
+              >
+                -
+              </button>
+              <span>${item.quantity}</span>
+              <button
+                class="cart-quantity-btn"
+                type="button"
+                data-cart-action="increase"
+                data-id="${escapeHtml(item.id)}"
+                aria-label="Agregar una unidad de ${escapeHtml(item.name)}"
+              >
+                +
+              </button>
+            </div>
+          </td>
+          <td>${formatCordobas(item.price * item.quantity)}</td>
+          <td>
+            <button
+              class="cart-remove"
+              type="button"
+              data-cart-action="remove"
+              data-id="${escapeHtml(item.id)}"
+              aria-label="Eliminar ${escapeHtml(item.name)}"
+            >
+              ×
+            </button>
+          </td>
+        </tr>
+      `;
+    })
+    .join("");
+}
+
+function trackAddToCart(product) {
+  if (typeof window.gtag !== "function") {
+    return;
+  }
+
+  window.gtag("event", "add_to_cart", {
+    currency: "NIO",
+    value: product.price,
+    items: [
+      {
+        item_id: product.id,
+        item_name: product.name,
+        price: product.price,
+        quantity: 1,
+      },
+    ],
+    transport_type: "beacon",
+  });
+}
+
+function trackBeginCheckout(cartTotal) {
+  if (typeof window.gtag !== "function") {
+    return;
+  }
+
+  window.gtag("event", "begin_checkout", {
+    currency: "NIO",
+    value: cartTotal,
+    items: cartItems.map((item) => ({
+      item_id: item.id,
+      item_name: item.name,
+      price: item.price,
+      quantity: item.quantity,
+    })),
+    transport_type: "beacon",
+  });
+}
+
+function addProductToCart(product) {
+  const existingItem = cartItems.find((item) => item.id === product.id);
+
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cartItems.push({ ...product, quantity: 1 });
+  }
+
+  saveCart();
+  renderCart();
+  trackAddToCart(product);
+}
+
+function handleProductCartClick(event) {
+  if (!(event.target instanceof Element)) {
+    return;
+  }
+
+  const button = event.target.closest(".agregar-carrito");
+
+  if (!button) {
+    return;
+  }
+
+  const product = {
+    id: String(button.dataset.id),
+    name: button.dataset.nombre,
+    price: parsePrice(button.dataset.precio),
+  };
+
+  if (!product.id || !product.name) {
+    return;
+  }
+
+  addProductToCart(product);
+
+  const originalText = button.textContent;
+  button.textContent = "Agregado";
+  button.classList.add("is-added");
+
+  window.setTimeout(() => {
+    button.textContent = originalText;
+    button.classList.remove("is-added");
+  }, 1200);
+}
+
+function updateCartItemQuantity(productId, change) {
+  const item = cartItems.find((cartItem) => cartItem.id === productId);
+
+  if (!item) {
+    return;
+  }
+
+  item.quantity += change;
+
+  if (item.quantity <= 0) {
+    cartItems = cartItems.filter((cartItem) => cartItem.id !== productId);
+  }
+
+  saveCart();
+  renderCart();
+}
+
+function handleCartActionClick(event) {
+  if (!(event.target instanceof Element)) {
+    return;
+  }
+
+  const button = event.target.closest("[data-cart-action]");
+
+  if (!button) {
+    return;
+  }
+
+  const productId = button.dataset.id;
+
+  if (!productId) {
+    return;
+  }
+
+  if (button.dataset.cartAction === "increase") {
+    updateCartItemQuantity(productId, 1);
+    return;
+  }
+
+  if (button.dataset.cartAction === "decrease") {
+    updateCartItemQuantity(productId, -1);
+    return;
+  }
+
+  if (button.dataset.cartAction === "remove") {
+    cartItems = cartItems.filter((item) => item.id !== productId);
+    saveCart();
+    renderCart();
+  }
+}
+
+productosLista?.addEventListener("click", handleProductCartClick);
+
+cartTableBody?.addEventListener("click", handleCartActionClick);
+
+cartButton?.addEventListener("click", (event) => {
+  event.preventDefault();
+  cartButton.closest(".submenu")?.classList.toggle("is-open");
+});
+
+checkoutCartButton?.addEventListener("click", (event) => {
+  event.preventDefault();
+
+  if (cartItems.length === 0) {
+    window.alert("Agrega al menos un producto antes de comprar.");
+    return;
+  }
+
+  const cartTotal = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0,
+  );
+  const orderLines = cartItems
+    .map((item) => {
+      return `- ${item.quantity} x ${item.name} (${formatCordobas(item.price)} c/u) = ${formatCordobas(item.price * item.quantity)}`;
+    })
+    .join("\n");
+  const message = [
+    "Hola Farmacia Angeluz, quiero comprar estos productos:",
+    "",
+    orderLines,
+    "",
+    `Total: ${formatCordobas(cartTotal)}`,
+    "",
+    "¿Me ayudan a confirmar disponibilidad y entrega?",
+  ].join("\n");
+  const whatsappUrl = `https://wa.me/${whatsappOrderNumber}?text=${encodeURIComponent(message)}`;
+
+  trackBeginCheckout(cartTotal);
+  window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+});
+
+emptyCartButton?.addEventListener("click", (event) => {
+  event.preventDefault();
+  cartItems = [];
+  saveCart();
+  renderCart();
+});
+
+renderCart();
 
 function trackSocialClick(event) {
   const link = event.currentTarget;
