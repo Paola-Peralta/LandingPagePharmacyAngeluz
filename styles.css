@@ -353,6 +353,7 @@ body {
   margin: 0 auto;
   object-fit: contain;
   transform: none;
+  cursor: pointer;
 }
 
 .swiper-button-prev::after {

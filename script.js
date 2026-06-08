@@ -40,6 +40,32 @@ document.querySelectorAll("[data-ga-social]").forEach((link) => {
   link.addEventListener("click", trackSocialClick);
 });
 
+function trackCarouselClick(event) {
+  const image = event.currentTarget;
+
+  if (!(image instanceof HTMLImageElement)) {
+    return;
+  }
+
+  const carouselPosition = image.dataset.gaCarousel;
+
+  if (!carouselPosition || typeof window.gtag !== "function") {
+    return;
+  }
+
+  window.gtag("event", `click_carrusel_${carouselPosition}`, {
+    event_category: "carrusel",
+    event_label: image.dataset.gaCarouselName || `Carrusel ${carouselPosition}`,
+    carousel_position: carouselPosition,
+    carousel_image: image.getAttribute("src") || "",
+    transport_type: "beacon",
+  });
+}
+
+document.querySelectorAll("[data-ga-carousel]").forEach((image) => {
+  image.addEventListener("click", trackCarouselClick);
+});
+
 function scrollToProductos(event) {
   const target = document.querySelector("#productos");
 
