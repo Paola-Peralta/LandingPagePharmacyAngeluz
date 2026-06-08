@@ -13,6 +13,33 @@ const supabase = hasSupabaseConfig
 
 const productosLista = document.querySelector("#productos-lista");
 
+function trackSocialClick(event) {
+  const link = event.currentTarget;
+
+  if (!(link instanceof HTMLAnchorElement)) {
+    return;
+  }
+
+  const socialNetwork = link.dataset.gaSocial;
+
+  if (!socialNetwork || typeof window.gtag !== "function") {
+    return;
+  }
+
+  window.gtag("event", `click_${socialNetwork}`, {
+    event_category: "redes_sociales",
+    event_label: socialNetwork,
+    social_network: socialNetwork,
+    button_location: link.dataset.gaLocation || "unknown",
+    link_url: link.href,
+    transport_type: "beacon",
+  });
+}
+
+document.querySelectorAll("[data-ga-social]").forEach((link) => {
+  link.addEventListener("click", trackSocialClick);
+});
+
 function scrollToProductos(event) {
   const target = document.querySelector("#productos");
 
