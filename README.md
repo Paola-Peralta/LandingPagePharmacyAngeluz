@@ -1,1 +1,1 @@
-Landing page aplicando marketing digital en farmacia Angeluz
+Landing page aplicando marketing digital.
